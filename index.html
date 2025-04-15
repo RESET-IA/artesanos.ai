@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mentor IA Modal</title>
+  <title>Mentor IA </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * { box-sizing: border-box; }
@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: url('IMAGENES/FONDOL.png') no-repeat center center fixed;
+      background: url('IMAGENES/FONDOL.jpg') no-repeat center center fixed;
       background-size: cover;
       height: 100vh;
       display: flex;
@@ -21,21 +21,27 @@
       overflow: hidden;
     }
 
+    /* Imagen lateral para desktop */
     #leftImage {
       position: absolute;
-      left: 460px;
       top: 35%;
+      left: 360px;
       transform: translateY(-50%);
-      width: 420px;
+      width: 620px;
       border-radius: 20px;
       box-shadow: 0 6px 20px rgb(238, 2, 2);
       z-index: 1;
     }
 
+    /* Imagen móvil centrada */
+    #mobileTopImage {
+      display: none;
+    }
+
     /* BOTÓN LIA */
     #liaWidget {
       position: absolute;
-      top: 60%;
+      top: 65%;
       transform: translateY(-50%) scale(1);
       width: 160px;
       height: 160px;
@@ -57,7 +63,7 @@
     #liaWidget iframe {
       width: 400px;
       height: 400px;
-      transform: scale(0.75) translate(-110px, -60px);
+      transform: scale(0.60) translate(-175px, -135px);
       border: none;
       pointer-events: none;
     }
@@ -90,6 +96,28 @@
       100% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
     }
 
+    /* REDES SOCIALES */
+    #socialLinks {
+      position: absolute;
+      top: 85%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 18px;
+      z-index: 10;
+    }
+
+    #socialLinks a img {
+      width: 32px;
+      height: 32px;
+      transition: transform 0.2s ease;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+    }
+
+    #socialLinks a img:hover {
+      transform: scale(1.15);
+    }
+
     /* FONDO OSCURO DETRÁS DEL PANEL */
     #backgroundOverlay {
       position: fixed;
@@ -98,28 +126,27 @@
       width: 100vw;
       height: 100vh;
       background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
       z-index: 9998;
       display: none;
     }
 
     /* PANEL DESLIZANTE DERECHO */
     .slide-panel {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  width: 480px;
-  max-width: calc(100% - 60px);
-  height: 90vh;
-  background-color: #fff;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  z-index: 9999;
-  transform: translateX(120%); /* 🔄 CORREGIDO */
-  transition: transform 0.4s ease-in-out;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      width: 480px;
+      max-width: calc(100% - 60px);
+      height: 90vh;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 9999;
+      transform: translateX(120%);
+      transition: transform 0.4s ease-in-out;
+      border-radius: 16px;
+      overflow: hidden;
+    }
 
     .slide-panel.active {
       transform: translateX(0%);
@@ -142,14 +169,30 @@
       z-index: 10000;
     }
 
-    /* RESPONSIVE TABLET */
+    /* TABLETS */
+    @media (max-width: 1024px) {
+      #leftImage {
+        width: 480px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    /* TABLETS Y CELULARES GRANDES */
     @media (max-width: 768px) {
       #leftImage {
         display: none;
       }
 
-      body {
-        background-size: cover;
+      #mobileTopImage {
+        display: block;
+        position: absolute;
+        top: 8%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 320px;
+        max-width: 90%;
+        z-index: 2;
       }
 
       #liaWidget {
@@ -160,7 +203,11 @@
       #liaWidget iframe {
         width: 300px;
         height: 300px;
-        transform: scale(0.72) translate(-90px, -55px);
+        transform: scale(0.7) translate(-88px, -60px);
+      }
+
+      #socialLinks {
+        top: 86%;
       }
 
       .slide-panel {
@@ -174,12 +221,17 @@
       }
     }
 
-    /* RESPONSIVE CELULARES */
+    /* CELULARES PEQUEÑOS */
     @media (max-width: 480px) {
       body {
         background-size: contain;
         background-position: center;
         background-attachment: scroll;
+      }
+
+      #mobileTopImage {
+        top: 6%;
+        width: 260px;
       }
 
       #liaWidget {
@@ -190,7 +242,11 @@
       #liaWidget iframe {
         width: 280px;
         height: 280px;
-        transform: scale(0.7) translate(-85px, -50px);
+        transform: scale(0.68) translate(-82px, -54px);
+      }
+
+      #socialLinks {
+        top: 87%;
       }
 
       .slide-panel {
@@ -206,8 +262,11 @@
 </head>
 <body>
 
-  <!-- IMAGEN IZQUIERDA -->
-  <img id="leftImage" src="IMAGENES/LogoReset-Artesanos.png" alt="Chatbot Avatar">
+  <!-- IMAGEN DESKTOP -->
+  <img id="leftImage" src="IMAGENES/LogoReset-Artesanos.png" alt="Logo Desktop">
+
+  <!-- IMAGEN MOBILE (visible solo en celulares) -->
+  <img id="mobileTopImage" src="IMAGENES/LogoReset-Artesanos.png" alt="Logo Mobile">
 
   <!-- BOTÓN DE LIA® -->
   <div id="liaWidget" onclick="abrirPanel()">
@@ -218,6 +277,14 @@
       allow="microphone; camera; autoplay; encrypted-media"
       allowfullscreen>
     </iframe>
+  </div>
+
+   <!-- REDES SOCIALES -->
+   <div id="socialLinks">
+    <a href="https://www.facebook.com/reset.la" target="_blank"><img src="IMAGENES/facebook.jpg" alt="Facebook"></a>
+    <a href="https://www.youtube.com/@reset6629/" target="_blank"><img src="IMAGENES/you.png" alt="YouTube"></a>
+    <a href="https://www.linkedin.com/company/resetfirm-ai/" target="_blank"><img src="IMAGENES/link.png" alt="LinkedIn"></a>
+    <a href="https://www.instagram.com/resetfirm.ai/" target="_blank"><img src="IMAGENES/insta.jpg" alt="Instagram"></a>
   </div>
 
   <!-- FONDO OSCURO -->
@@ -247,3 +314,5 @@
 
 </body>
 </html>
+
+ 
