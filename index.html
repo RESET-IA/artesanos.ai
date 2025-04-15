@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mentor IA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Mentor IA Modal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { box-sizing: border-box; }
 
@@ -21,7 +21,6 @@
       overflow: hidden;
     }
 
-    /* Imagen lateral para desktop */
     #leftImage {
       position: absolute;
       top: 35%;
@@ -33,12 +32,10 @@
       z-index: 1;
     }
 
-    /* Imagen móvil centrada */
     #mobileTopImage {
       display: none;
     }
 
-    /* BOTÓN LIA */
     #liaWidget {
       position: absolute;
       top: 65%;
@@ -96,7 +93,6 @@
       100% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
     }
 
-    /* REDES SOCIALES */
     #socialLinks {
       position: absolute;
       top: 85%;
@@ -118,7 +114,6 @@
       transform: scale(1.15);
     }
 
-    /* FONDO OSCURO DETRÁS DEL PANEL */
     #backgroundOverlay {
       position: fixed;
       top: 0;
@@ -131,7 +126,6 @@
       display: none;
     }
 
-    /* PANEL DESLIZANTE DERECHO */
     .slide-panel {
       position: fixed;
       top: 30px;
@@ -169,7 +163,6 @@
       z-index: 10000;
     }
 
-    /* TABLETS */
     @media (max-width: 1024px) {
       #leftImage {
         width: 480px;
@@ -178,7 +171,6 @@
       }
     }
 
-    /* TABLETS Y CELULARES GRANDES */
     @media (max-width: 768px) {
       #leftImage {
         display: none;
@@ -203,7 +195,7 @@
       #liaWidget iframe {
         width: 300px;
         height: 300px;
-        transform: scale(0.60) translate(-175px, -135px);
+        transform: scale(0.75) translate(-95px, -115px);
       }
 
       #socialLinks {
@@ -221,14 +213,12 @@
       }
     }
 
-    /* CELULARES PEQUEÑOS */
     @media (max-width: 480px) {
-  body {
-    background-size: cover; /* ✅ Esto es lo que asegura que se expanda totalmente */
-    background-position: center;
-    background-attachment: scroll;
-  }
-}
+      body {
+        background-size: cover;
+        background-position: center;
+        background-attachment: scroll;
+      }
 
       #mobileTopImage {
         top: 6%;
@@ -238,16 +228,19 @@
       #liaWidget {
         width: 130px;
         height: 130px;
+        top: 60%;
       }
 
       #liaWidget iframe {
-        width: 280px;
-        height: 280px;
-        transform: scale(0.68) translate(-82px, -54px);
-      }
+  width: 280px;
+  height: 280px;
+  transform: scale(0.75) translate(-85px, -200px); /* ✅ AJUSTADO para mostrar el rostro completo */
+  border: none;
+  pointer-events: none;
+}
 
       #socialLinks {
-        top: 87%;
+        top: 88%;
       }
 
       .slide-panel {
@@ -258,19 +251,14 @@
         right: 5%;
         border-radius: 20px;
       }
-  
+    }
   </style>
 </head>
 <body>
 
-  <!-- IMAGEN DESKTOP -->
   <img id="leftImage" src="IMAGENES/LogoReset-Artesanos.png" alt="Logo Desktop">
-
-  <!-- IMAGEN MOBILE (visible solo en celulares) -->
   <img id="mobileTopImage" src="IMAGENES/LogoReset-Artesanos.png" alt="Logo Mobile">
-  <img id="mobileTopImage" src="IMAGENES/FONDOL.jpg" alt="Logo Mobile">
 
-  <!-- BOTÓN DE LIA® -->
   <div id="liaWidget" onclick="abrirPanel()">
     <div class="overlay-face"></div>
     <div class="fade-bottom"></div>
@@ -281,18 +269,15 @@
     </iframe>
   </div>
 
-   <!-- REDES SOCIALES -->
-   <div id="socialLinks">
+  <div id="socialLinks">
     <a href="https://www.facebook.com/reset.la" target="_blank"><img src="IMAGENES/facebook.jpg" alt="Facebook"></a>
     <a href="https://www.youtube.com/@reset6629/" target="_blank"><img src="IMAGENES/you.png" alt="YouTube"></a>
     <a href="https://www.linkedin.com/company/resetfirm-ai/" target="_blank"><img src="IMAGENES/link.png" alt="LinkedIn"></a>
     <a href="https://www.instagram.com/resetfirm.ai/" target="_blank"><img src="IMAGENES/insta.jpg" alt="Instagram"></a>
   </div>
 
-  <!-- FONDO OSCURO -->
   <div id="backgroundOverlay" onclick="cerrarPanel()"></div>
 
-  <!-- PANEL DESLIZANTE DERECHO -->
   <div id="liaSidePanel" class="slide-panel">
     <span id="closePanel" onclick="cerrarPanel()">×</span>
     <iframe
@@ -316,5 +301,3 @@
 
 </body>
 </html>
-
- 
