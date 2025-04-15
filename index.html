@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mentor IA Modal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: url('IMAGENES/FONDOL.png') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #leftImage {
+      position: absolute;
+      left: 460px;
+      top: 35%;
+      transform: translateY(-50%);
+      width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgb(238, 2, 2);
+      z-index: 1;
+    }
+
+    /* BOTÓN LIA */
+    #liaWidget {
+      position: absolute;
+      top: 60%;
+      transform: translateY(-50%) scale(1);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background-color: #e5e5e5;
+      overflow: hidden;
+      box-shadow: 0 0 0 4px rgb(250, 2, 2);
+      cursor: pointer;
+      z-index: 11;
+      animation: pulseBorder 2s ease-out;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    #liaWidget:hover {
+      transform: translateY(-50%) scale(1.07);
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.6);
+    }
+
+    #liaWidget iframe {
+      width: 400px;
+      height: 400px;
+      transform: scale(0.75) translate(-110px, -60px);
+      border: none;
+      pointer-events: none;
+    }
+
+    .overlay-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .fade-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, rgba(229, 229, 229, 0.85), transparent);
+      z-index: 3;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @keyframes pulseBorder {
+      0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+      100% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+    }
+
+    /* FONDO OSCURO DETRÁS DEL PANEL */
+    #backgroundOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9998;
+      display: none;
+    }
+
+    /* PANEL DESLIZANTE DERECHO */
+    .slide-panel {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 480px;
+  max-width: calc(100% - 60px);
+  height: 90vh;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  z-index: 9999;
+  transform: translateX(120%); /* 🔄 CORREGIDO */
+  transition: transform 0.4s ease-in-out;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+
+
+    .slide-panel.active {
+      transform: translateX(0%);
+    }
+
+    .slide-panel iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    #closePanel {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #050000;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    /* RESPONSIVE TABLET */
+    @media (max-width: 768px) {
+      #leftImage {
+        display: none;
+      }
+
+      body {
+        background-size: cover;
+      }
+
+      #liaWidget {
+        width: 140px;
+        height: 140px;
+      }
+
+      #liaWidget iframe {
+        width: 300px;
+        height: 300px;
+        transform: scale(0.72) translate(-90px, -55px);
+      }
+
+      .slide-panel {
+        width: 85%;
+        max-width: 340px;
+        height: 85vh;
+        bottom: 20px;
+        top: auto;
+        right: 10px;
+        border-radius: 20px;
+      }
+    }
+
+    /* RESPONSIVE CELULARES */
+    @media (max-width: 480px) {
+      body {
+        background-size: contain;
+        background-position: center;
+        background-attachment: scroll;
+      }
+
+      #liaWidget {
+        width: 130px;
+        height: 130px;
+      }
+
+      #liaWidget iframe {
+        width: 280px;
+        height: 280px;
+        transform: scale(0.7) translate(-85px, -50px);
+      }
+
+      .slide-panel {
+        width: 90%;
+        height: 80vh;
+        bottom: 20px;
+        top: auto;
+        right: 5%;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- IMAGEN IZQUIERDA -->
+  <img id="leftImage" src="IMAGENES/LogoReset-Artesanos.png" alt="Chatbot Avatar">
+
+  <!-- BOTÓN DE LIA® -->
+  <div id="liaWidget" onclick="abrirPanel()">
+    <div class="overlay-face"></div>
+    <div class="fade-bottom"></div>
+    <iframe
+      src="https://studio.d-id.com/agents/share?id=agt_AgWTXGyD&utm_source=copy&key=WVhWMGFEQjhOamRpWlRFeVpURXhOekEyTVRZMU0yVTVaV1EwWW1VMk9rMDNOREJHYkhGVFUxaEVhMUEyU0Rjd1VsUlZOQT09"
+      allow="microphone; camera; autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- FONDO OSCURO -->
+  <div id="backgroundOverlay" onclick="cerrarPanel()"></div>
+
+  <!-- PANEL DESLIZANTE DERECHO -->
+  <div id="liaSidePanel" class="slide-panel">
+    <span id="closePanel" onclick="cerrarPanel()">×</span>
+    <iframe
+      src="https://studio.d-id.com/agents/share?id=agt_AgWTXGyD&utm_source=copy&key=WVhWMGFEQjhOamRpWlRFeVpURXhOekEyTVRZMU0yVTVaV1EwWW1VMk9rMDNOREJHYkhGVFUxaEVhMUEyU0Rjd1VsUlZOQT09"
+      allow="microphone; camera; autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script>
+    function abrirPanel() {
+      document.getElementById("liaSidePanel").classList.add("active");
+      document.getElementById("backgroundOverlay").style.display = "block";
+    }
+
+    function cerrarPanel() {
+      document.getElementById("liaSidePanel").classList.remove("active");
+      document.getElementById("backgroundOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
