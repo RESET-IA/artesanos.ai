@@ -214,44 +214,45 @@
     }
 
     @media (max-width: 480px) {
-      body {
-        background-size: cover;
-        background-position: center;
-        background-attachment: scroll;
-      }
+  body {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+  }
 
-      #mobileTopImage {
-        top: 6%;
-        width: 260px;
-      }
+  #mobileTopImage {
+    top: 6%;
+    width: 260px;
+  }
 
-      #liaWidget {
-        width: 230px;
-        height: 230px;
-        top: 60%;
-      }
+  #liaWidget {
+    width: 170px;
+    height: 170px;
+    top: 60%;
+  }
 
-      #liaWidget iframe {
-  width: 280px;
-  height: 280px;
-  transform: scale(0.75) translate(-85px, -50px); /* ✅ AJUSTADO para mostrar el rostro completo */
-  border: none;
-  pointer-events: none;
+  #liaWidget iframe {
+    width: 320px;
+    height: 320px;
+    transform: scale(0.75) translate(-105px, -190px); /* rostro más visible */
+    border: none;
+    pointer-events: none;
+  }
+
+  #socialLinks {
+    top: 88%;
+    gap: 10px; /* reducido para menor separación entre íconos */
+  }
+
+  .slide-panel {
+    width: 90%;
+    height: 80vh;
+    bottom: 20px;
+    top: auto;
+    right: 5%;
+    border-radius: 20px;
+  }
 }
-
-      #socialLinks {
-        top: 88%;
-      }
-
-      .slide-panel {
-        width: 90%;
-        height: 80vh;
-        bottom: 20px;
-        top: auto;
-        right: 5%;
-        border-radius: 20px;
-      }
-    }
   </style>
 </head>
 <body>
